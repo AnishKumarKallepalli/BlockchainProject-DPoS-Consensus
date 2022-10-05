@@ -1,9 +1,9 @@
 # Blockchain Assignment - 1
 
 ## Team members - (Group 34)
-1) 
-2) 
-3) 
+1) 2020A3PS2117H - Anurag Bachchu Sarkar
+2) 2020A3PS2123H - Yash Pramod Kadam
+3) 2020A7PS0282H - Anish Kumar Kallepalli
 
 ## Objective
 * This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the context of a Land Management System.
