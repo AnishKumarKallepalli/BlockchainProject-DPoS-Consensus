@@ -60,7 +60,7 @@ class Blockchain(object):
  
  
     #Adding a new transaction in the next block
-  def new_transaction(self, buyer_name, seller_name, property_name, amount):
+    def new_transaction(self, buyer_name, seller_name, property_name, amount):
         self.unverified_transactions.append({
             'Buyer name': buyer_name,
             'Seller name': seller_name,
@@ -97,18 +97,18 @@ class Blockchain(object):
  
         for x in self.all_nodes:
             y=list(x)
-            y.append(x[1] * randint(0,100))
+            y.append(int(x[1]) * randint(0,100))
             self.voteNodespool.append(y)
  
         print(self.voteNodespool)
  
  
-    #Selecting the 3 nodes with the most votes
+    #Selecting the top node with the most votes
     def selection(self):
         self.starNodespool = sorted(self.voteNodespool, key = lambda vote: vote[2],reverse = True)
         print(self.starNodespool)
  
-        for x in range(3):
+        for x in range(1):
             self.superNodespool.append(self.starNodespool[x])
         print(self.superNodespool)
  
@@ -119,12 +119,12 @@ class Blockchain(object):
  
     #Syncing the list
     def sync(self):
-        r = requests.get('http://localhost:5000/delegates/show')
+        r = requests.get('http://localhost:7000/delegates/show')
         print(r)
  
         if(r.status_code == 200):
             delegates = r.json()['node_delegates']
-            self.delegates = delegates[0:3]
+            self.delegates = delegates[0:1]
             print(self.delegates)
  
  
@@ -167,5 +167,5 @@ class Blockchain(object):
             self.chain = new_chain
             return True
  
-        return False    
+        return False 
  
