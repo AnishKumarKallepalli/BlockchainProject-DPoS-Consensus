@@ -44,47 +44,47 @@ The first step in initialising the network is to add the nodes along with their 
 Voting is done using a GET route. Voting can only be conducted by the primary node (`localhost:5000`), and all other nodes receive an error message. Once called, a JSON response which consists the address of the node, stake of the node and the value of (stake * votes) corresponding to the nodes is sent to the primary node.
 
 Voting results showing address, stake and (votes * stake) of all participating nodes
-![Voting](./images/voting.png)
+![Voting](./Images/voting.jpg)
 
 Nodes apart from the primary node receive an error message.
-![Error](./images/voting_error.png)
+![Error](./Images/voting_error.jpg)
 
 3). `/delegates/show`
 
 This GET route sends all the delegates elected for mining to be viewed to the primary node.
 
-![Show delegates](./images/delegates_show.png)
+![Show delegates](./Images/delegates_show.jpg)
 
 4). `/delegates/sync`
 
 This GET endpoint allows all the other nodes in the network to also fetch the list of delegate nodes.
 
-![Sync delegates](./images/delegates_sync.png)
+![Sync delegates](./Images/delegates_sync.jpg)
 
 5). `/transactions/new`
 
 This POST method initiates a new transaction and requires the user to enter the customer name, item name and total billing amount in JSON format.
 
-![New transaction](./images/transaction.png)
+![New transaction](./Images/transaction.jpg)
 
 6). `/mine`
 
 This GET endpoint facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate or validator nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
 
 This error message will be received by a non-delegate node that tries to mine a new block.
-![Mine error](./images/error_mine.png)
+![Mine error](./Images/error_mine.jgp)
 
 There must be atleast 2 transactions per block
-![Under transaction](./images/undertransaction.png)
+![Under transaction](./Images/undertransaction.jpg)
 
 Structure of a typical block mined by a delegated node
-![Block structure](./images/block.png)
+![Block structure](./Images/block.jpg)
 
 7). `/chain`
 
 This GET method facilitates the user to view the entire blockchain and its length.
 
-![Blockchain](./images/chain.png)
+![Blockchain](./Images/chain.jpg)
 
 8). `/chain/resolve`
 
