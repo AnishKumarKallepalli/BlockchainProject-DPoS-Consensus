@@ -10,7 +10,7 @@ Here, in DPoS, user's vote weight is proportional to their stake rather than blo
 
 ### Methods in `blockchain.py`
 
-* `localhost:5000` is used as the primary node which takes care of adding new nodes, maintaining stakes of nodes and conducting the election process to choose 3 delegate nodes which are authorised to validate transactions and mine new blocks.
+* `localhost:7000` is used as the primary node which takes care of adding new nodes, maintaining stakes of nodes and conducting the election process to choose 3 delegate nodes which are authorised to validate transactions and mine new blocks.
 
 * There is no upper limit on how many nodes can be added to the network, however, only 3 nodes will be chosen as delegate nodes after the voting process.
 
@@ -41,7 +41,7 @@ The first step in initialising the network is to add the nodes along with their 
 
 2). `/voting`
 
-Voting is done using a GET route. Voting can only be conducted by the primary node (`localhost:5000`), and all other nodes receive an error message. Once called, a JSON response which consists the address of the node, stake of the node and the value of (stake * votes) corresponding to the nodes is sent to the primary node.
+Voting is done using a GET route. Voting can only be conducted by the primary node (`localhost:7000`), and all other nodes receive an error message. Once called, a JSON response which consists the address of the node, stake of the node and the value of (stake * votes) corresponding to the nodes is sent to the primary node.
 
 Voting results showing address, stake and (votes * stake) of all participating nodes
 ![Voting](./Images/voting.jpg)
@@ -103,8 +103,8 @@ This endpoint finds the longest validated chain by checking all the neighbouring
 
         We can open different network ports on the same machine, on different terminals to simulate multinode network
     
-    * `python3 main.py -p 5001`
-    * `python3 main.py -p 5002`
+    * `python3 main.py -p 7001`
+    * `python3 main.py -p 7002`
 
 3) Run the API endpoints on an HTTP Client like [Postman](https://www.postman.com/downloads/).
 
