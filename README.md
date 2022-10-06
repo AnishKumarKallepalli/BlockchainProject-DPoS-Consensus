@@ -26,7 +26,7 @@ Delegated Proof Of Stake (DPoS) is a consensus algorithm which is an advancement
 
 1). `/addnode`
 
-The first step is to add the nodes along with their stakes. This is done by a POST route. The URL address of the nodes along with their stakes need to be added.
+This is  a POST route to add nodes. The URL address of the nodes along with their stakes need to be added.
 
 ![Nodes add](./Images/add_nodes.jpg)
 
@@ -34,15 +34,17 @@ The first step is to add the nodes along with their stakes. This is done by a PO
 
 Voting is done using a GET route. Voting can only be conducted by the primary node (`localhost:7000`), and all other nodes receive an error message. Once called, a JSON response which consists the address of the node, stake of the node and the value of (stake * votes) corresponding to the nodes is sent to the primary node.
 
-Voting results showing address, stake and (votes * stake) of all participating nodes
+Voting results showing address, stake and (votes * stake) of all nodes.
+
 ![Voting](./Images/voting.jpg)
 
 Nodes apart from the primary node receive an error message.
+
 ![Error](./Images/voting_error.jpg)
 
 3). `/show`
 
-This GET route sends all the delegates elected to the primary node.
+This GET route sends all the elected delegates to the primary node.
 
 ![Show delegates](./Images/delegates_show.jpg)
 
@@ -60,15 +62,18 @@ This POST route initiates a new transaction and requires the user to enter the b
 
 6). `/mine`
 
-This GET route facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
-
-This error message will be received by a non-delegate node that tries to mine a new block.
-![Mine error](./Images/error_mine.jpg)
+This GET route facilitates validating transactions and mining new blocks. According to the DPoS consensus, only delegate nodes can mine the new blocks. To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
 
 There must be atleast 2 transactions per block
+
 ![Under transaction](./Images/transaction2.jpg)
 
+This error message will be received by a non-delegate node that tries to mine a new block.
+
+![Mine error](./Images/error_mine.jpg)
+
 Structure of a typical block mined by a delegated node
+
 ![Block structure](./Images/block.jpg)
 
 7). `/blockchain`
@@ -80,3 +85,5 @@ This GET route facilitates the user to view the entire blockchain and its length
 8). `/blockchain/resolve`
 
 This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
+
+9)![Resolve](./Images/resolve.jpg)
