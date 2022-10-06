@@ -94,7 +94,7 @@ def add_nodes():
 @app.route('/voting',methods=['GET'])
 def voting():
  
-    if(port == 5000):
+    if(port == 7000):
         show_votes = blockchain.add_vote()
  
         response ={
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
  
     parser = ArgumentParser()
-    parser.add_argument('-p', '--port', default=5000, type=int, help='Listening on port')
+    parser.add_argument('-p', '--port', default=7000, type=int, help='Listening on port')
     args = parser.parse_args()
     port = args.port
     app.run(host = '0.0.0.0', port = port) 
