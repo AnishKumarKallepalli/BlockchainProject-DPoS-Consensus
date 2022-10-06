@@ -1,6 +1,11 @@
 # Blockchain Assignment - 1
 
-## How to run
+## Team Members - (Group 34)
+1) [Anish Kumar Kallepalli](https://github.com/AnishKumarKallepalli) (2020A7PS0282H)
+2) [Yash Pramod Kadam](https://github.com/RakuidN) (2020A3PS2123H)
+3) [Anurag Bachchu Sarkar](https://github.com/AnuragSarkar3) (2020A3PS2117H)
+
+## How to Run
 1) Make sure Python 3.8+ , Flask and requests library is installed.
     *  If not downloaded, Download any version of Python (>=3.8) from the [official website](https://www.python.org/downloads/).
     *  Install flask   => `pip install flask`
@@ -17,7 +22,7 @@
 ## Delegated Proof of Stake (DPoS) algorithm 
 Delegated Proof Of Stake (DPoS) is a consensus algorithm which is an advancement of the fundamental concepts of Proof Of Stake. Delegated Proof of Stake (DPoS) consensus algorithm was developed by Daniel Larimer, founder of BitShares, Steemit and EOS in 2014. In DPoS, each node that has a stake in the system can delegate the validation of a transaction to other nodes by voting. In DPoS, user's vote weight is proportional to their stake rather than block mining being tied to the stakeholders' total tokens.
 
-### How to interact with our blockchain
+### How to interact with our Blockchain
 
 1). `/addnode`
 
@@ -75,8 +80,3 @@ This GET route facilitates the user to view the entire blockchain and its length
 8). `/blockchain/resolve`
 
 This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
-
-## Team members - (Group 34)
-1) [Anish Kumar Kallepalli](https://github.com/AnishKumarKallepalli) (2020A7PS0282H)
-2) [Yash Pramod Kadam](https://github.com/RakuidN) (2020A3PS2123H)
-3) [Anurag Bachchu Sarkar](https://github.com/AnuragSarkar3) (2020A3PS2117H)
