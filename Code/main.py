@@ -5,11 +5,97 @@ from blockchain import Blockchain
 #Initialising the node with identifier and instantiating the Blockchain class
 app = Flask(__name__)
 blockchain = Blockchain()
+
+
+
+#API call for adding HTTP address of new nodes along with their stakes in the network.
+@app.route('/addnode', methods=['POST'])
+def add_nodes():
+    values = request.get_json()
+    required = ['nodeaddress','stake']
  
+    if not all(k in values for k in required):
+        return 'Error',400
+ 
+    blockchain.add_node(values['nodeaddress'], values['stake'])
+ 
+    response = {
+        'message': 'New nodes are added!',
+        'total_nodes': list(blockchain.nodes)
+    }
+    print(blockchain.nodes)
+    return jsonify(response), 201
+ 
+
+
+ #API call to start the voting process
+@app.route('/vote',methods=['GET'])
+def voting():
+ 
+    if(port == 7000):
+        show_votes = blockchain.add_vote()
+ 
+        response ={
+            'message': 'The voting results are as follows:',
+            'nodes': blockchain.voteNodespool
+            }
+ 
+        return jsonify(response),200
+ 
+    else:
+        response={
+            'message': 'You are not authorized to conduct the election process!'
+        }
+        return jsonify(response),400
+ 
+
+
+#API call to view the list of all three elected delegate nodes
+@app.route('/show',methods=['GET'])
+def delegates():
+    show_delegates = blockchain.selection()
+ 
+    response={
+        'message': 'The top 2 nodes selected for block mining are:',
+        'node_delegates': blockchain.delegates
+    }
+    return jsonify(response),200
+ 
+
+
+#API call to synchronise the list of elected delegates with all other nodes in the network 
+@app.route('/sync',methods=['GET'])
+def sync_delegates():
+    sync_delegates = blockchain.sync()
+ 
+    response ={
+        'message': 'The delegate nodes are:',
+        'node_delegates':blockchain.delegates
+    }
+    return jsonify(response),200
+ 
+
+
+ #API call for a new transaction
+@app.route('/transaction/new', methods=['POST'])
+def new_transaction():
+    values = request.get_json()
+
+    required = ['Buyer name','Seller name','Property name','Amount']
+    if not all(k in values for k in required):
+        return 'Missing values! Please enter buyer name, seller name, property name and amount.', 400
+    
+    index = blockchain.new_transaction(values['Buyer name'], values['Seller name'], values['Property name'], values['Amount'])
+
+    response = {
+        'message': f'Transaction will be added to block {index}'
+    }
+    return jsonify(response), 201
+ 
+
+
 #API call using an HTTP GET request to mine a block
 @app.route('/mine', methods=['GET'])
- 
-#Mining a block 
 def mine():
  
     #Ensuring that only elected delegates can mine a new block
@@ -43,100 +129,21 @@ def mine():
         }
         return jsonify(response),400
  
- 
-#API call for a new transaction
-@app.route('/transactions/new', methods=['POST'])
-def new_transaction():
-    values = request.get_json()
 
-    required = ['Buyer name','Seller name','Property name','Amount']
-    if not all(k in values for k in required):
-        return 'Missing values! Please enter buyer name, seller name, property name and amount.', 400
-    
-    index = blockchain.new_transaction(values['Buyer name'], values['Seller name'], values['Property name'], values['Amount'])
-
-    response = {
-        'message': f'Transaction will be added to block {index}'
-    }
-    return jsonify(response), 201
- 
  
 #API call for viewing the blockchain
-@app.route('/chain', methods=['GET'])
+@app.route('/blockchain', methods=['GET'])
 def full_chain():
     response = {
         'chain': blockchain.chain,
         'length': len(blockchain.chain)
     }
     return jsonify(response), 200
+
  
- 
-#API call for adding HTTP address of new nodes along with their stakes in the network.
-@app.route('/nodes/add', methods=['POST'])
-def add_nodes():
-    values = request.get_json()
-    required = ['nodes','stake']
- 
-    if not all(k in values for k in required):
-        return 'Error',400
- 
-    blockchain.add_node(values['nodes'], values['stake'])
- 
-    response = {
-        'message': 'New nodes are added!',
-        'total_nodes': list(blockchain.nodes)
-    }
-    print(blockchain.nodes)
-    return jsonify(response), 201
- 
- 
-#API call to start the voting process
-@app.route('/voting',methods=['GET'])
-def voting():
- 
-    if(port == 7000):
-        show_votes = blockchain.add_vote()
- 
-        response ={
-            'message': 'The voting results are as follows:',
-            'nodes': blockchain.voteNodespool
-            }
- 
-        return jsonify(response),200
- 
-    else:
-        response={
-            'message': 'You are not authorized to conduct the election process!'
-        }
-        return jsonify(response),400
- 
- 
-#API call to view the list of all three elected delegate nodes
-@app.route('/delegates/show',methods=['GET'])
-def delegates():
-    show_delegates = blockchain.selection()
- 
-    response={
-        'message': 'The 3 delegate nodes selected for block mining are:',
-        'node_delegates': blockchain.delegates
-    }
-    return jsonify(response),200
- 
- 
-#API call to synchronise the list of elected delegates with all other nodes in the network 
-@app.route('/delegates/sync',methods=['GET'])
-def sync_delegates():
-    sync_delegates = blockchain.sync()
- 
-    response ={
-        'message': 'The delegate nodes are:',
-        'node_delegates':blockchain.delegates
-    }
-    return jsonify(response),200
- 
- 
+
 #API call to achieve consensus by resolving and replacing current chain with the longest validated chain
-@app.route('/chain/resolve', methods=['GET'])
+@app.route('/blockchain/resolve', methods=['GET'])
 def consensus():
     replaced = blockchain.resolve_chain()
  
