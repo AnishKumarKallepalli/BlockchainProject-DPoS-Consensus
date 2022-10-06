@@ -75,3 +75,8 @@ This GET route facilitates the user to view the entire blockchain and its length
 8). `/blockchain/resolve`
 
 This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
+
+## Team members - (Group 34)
+1) [Anish Kumar Kallepalli](https://github.com/krutibaraiya) (2020A7PS0282H)
+2) [Yash Pramod Kadam](https://github.com/vedansh-srivastava) (2020A3PS2123H)
+3) [Anurag Bachchu Sarkar](https://github.com/UmangAgarwal17) (2020A3PS2117H)
