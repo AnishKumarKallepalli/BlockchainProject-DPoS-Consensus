@@ -1,5 +1,19 @@
 # Blockchain Assignment - 1
 
+## How to run
+1) Make sure Python 3.8+ , Flask and requests library is installed.
+    *  If not downloaded, Download any version of Python (>=3.8) from the [official website](https://www.python.org/downloads/).
+    *  Install flask   => `pip install flask`
+    *  Install request => `pip install requests`
+
+2) `cd Code` and run the server:
+    * `py main.py`
+        We can open different network ports on different terminals to simulate multinode network
+    * `py main.py -p 7001`
+    * `py main.py -p 7002`
+
+3) Run the API endpoints on a browser or a HTTP Client like [Postman](https://www.postman.com/downloads/).
+
 ## Objective
 * This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the context of a Land Management System.
 
@@ -89,23 +103,3 @@ This GET method facilitates the user to view the entire blockchain and its lengt
 8). `/chain/resolve`
 
 This endpoint finds the longest validated chain by checking all the neighbouring nodes in the network and sets it as the primary blockchain.
-
-
-
-## How to run
-1) Make sure Python 3.8+ , Flask and requests library is installed.
-    * Download any version of Python (>=3.8) from the [official website](https://www.python.org/downloads/).
-    * `pip3 install flask`
-    * `pip3 install requests`
-
-2) `cd Blockchain` and run the server:
-    * `python3 main.py`
-
-        We can open different network ports on the same machine, on different terminals to simulate multinode network
-    
-    * `python3 main.py -p 7001`
-    * `python3 main.py -p 7002`
-
-3) Run the API endpoints on an HTTP Client like [Postman](https://www.postman.com/downloads/).
-
-
