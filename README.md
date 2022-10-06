@@ -1,10 +1,5 @@
 # Blockchain Assignment - 1
 
-## Team members - (Group 34)
-1) 2020A3PS2117H - Anurag Bachchu Sarkar
-2) 2020A3PS2123H - Yash Pramod Kadam
-3) 2020A7PS0282H - Anish Kumar Kallepalli
-
 ## Objective
 * This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the context of a Land Management System.
 
@@ -42,7 +37,7 @@ Here, in DPoS, user's vote weight is proportional to their stake rather than blo
 
 The first step in initialising the network is to add the nodes along with their stakes. This is done by a POST route. The URL of the nodes along with their stakes need to be added one at a time. This endpoint needs to be run from all ports before beginning any transaction in the blockchain.
 
-![Nodes add](./images/add_nodes.png)
+![Nodes add](images/add_nodes.png)
 
 2). `/voting`
 
