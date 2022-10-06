@@ -72,7 +72,7 @@ This POST method initiates a new transaction and requires the user to enter the 
 This GET endpoint facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate or validator nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
 
 This error message will be received by a non-delegate node that tries to mine a new block.
-![Mine error](./Images/error_mine.jgp)
+![Mine error](./Images/error_mine.jpg)
 
 There must be atleast 2 transactions per block
 ![Under transaction](./Images/transaction2.jpg)
