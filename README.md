@@ -15,31 +15,29 @@
 3) Run the API endpoints on a browser or a HTTP Client like [Postman](https://www.postman.com/downloads/).
 
 ## Objective
-* This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the context of a Land Management System.
+* This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the for a Land Management System.
 
 ## Delegated Proof of Stake (DPoS) algorithm 
-DPoS is a reliable, robust, scalable and efficient consensus algorithm in Blockchain technology. It is an innovation over standard Proof of Stake (PoS). In DPoS, each node that has a stake in the system can delegate the validation of a transaction to other nodes by voting.
+Delegated Proof Of Stake (DPoS) is a consensus algorithm which is an advancement of the fundamental concepts of Proof Of Stake. Delegated Proof of Stake (DPoS) consensus algorithm was developed by Daniel Larimer, founder of BitShares, Steemit and EOS in 2014. In DPoS, each node that has a stake in the system can delegate the validation of a transaction to other nodes by voting. In DPoS, user's vote weight is proportional to their stake rather than block mining being tied to the stakeholders' total tokens.
 
-Here, in DPoS, user's vote weight is proportional to their stake rather than block mining being tied to the stakeholders' total tokens.
+### Methods defined in `blockchain.py`
 
-### Methods in `blockchain.py`
+* `localhost:7000` is used as the primary node which takes care of adding new nodes, maintaining stakes of nodes and conducting the election process to choose 1 delegate node which are authorised to validate transactions and mine new blocks.
 
-* `localhost:7000` is used as the primary node which takes care of adding new nodes, maintaining stakes of nodes and conducting the election process to choose 3 delegate nodes which are authorised to validate transactions and mine new blocks.
-
-* There is no upper limit on how many nodes can be added to the network, however, only 3 nodes will be chosen as delegate nodes after the voting process.
+* There is no upper limit on how many nodes can be added to the network, however, only the top node will be chosen as a delegate node after the voting process.
 
 * Simulation of the voting process is done by randomly assigning votes between 0 and 100 using the `randint()` function in python.
     * Snippet of voting method of Blockchain class implemented in `blockchain.py`
     ```
  
     ```
-* The election process is based on the stakes and votes of all the stakeholders, selecting the top 3 nodes with the highest `(stakes*votes)` values.
+* The election process is based on the stakes and votes of all the stakeholders, selecting the top node with the highest `(stakes*votes)` values.
     * Snippet of the delegated selection implemented in Blockchain class in `blockchain.py`
     ```
 
     ```
 
-* The primary node (localhost:5000) generates the delegate list and all other nodes can view the elected delegates. For this we have a sync().
+* The primary node (localhost:7000) generates the delegate list and all other nodes can view the elected delegates. For this we have a sync method.
     * Snippet of sync method implemented in Blockchain class in `blockchain.py`
     ```
 
