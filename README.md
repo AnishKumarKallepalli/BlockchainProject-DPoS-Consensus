@@ -75,7 +75,7 @@ This error message will be received by a non-delegate node that tries to mine a 
 ![Mine error](./Images/error_mine.jgp)
 
 There must be atleast 2 transactions per block
-![Under transaction](./Images/undertransaction.jpg)
+![Under transaction](./Images/transaction2.jpg)
 
 Structure of a typical block mined by a delegated node
 ![Block structure](./Images/block.jpg)
