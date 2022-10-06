@@ -14,44 +14,18 @@
 
 3) Run the API endpoints on a browser or a HTTP Client like [Postman](https://www.postman.com/downloads/).
 
-## Objective
-* This assignment focuses on implementing the consensus algorithm - __Delegated Proof of Stake__ in the for a Land Management System.
-
 ## Delegated Proof of Stake (DPoS) algorithm 
 Delegated Proof Of Stake (DPoS) is a consensus algorithm which is an advancement of the fundamental concepts of Proof Of Stake. Delegated Proof of Stake (DPoS) consensus algorithm was developed by Daniel Larimer, founder of BitShares, Steemit and EOS in 2014. In DPoS, each node that has a stake in the system can delegate the validation of a transaction to other nodes by voting. In DPoS, user's vote weight is proportional to their stake rather than block mining being tied to the stakeholders' total tokens.
 
-### Methods defined in `blockchain.py`
+### How to interact with our blockchain
 
-* `localhost:7000` is used as the primary node which takes care of adding new nodes, maintaining stakes of nodes and conducting the election process to choose 1 delegate node which are authorised to validate transactions and mine new blocks.
+1). `/addnode`
 
-* There is no upper limit on how many nodes can be added to the network, however, only the top node will be chosen as a delegate node after the voting process.
-
-* Simulation of the voting process is done by randomly assigning votes between 0 and 100 using the `randint()` function in python.
-    * Snippet of voting method of Blockchain class implemented in `blockchain.py`
-    ```
- 
-    ```
-* The election process is based on the stakes and votes of all the stakeholders, selecting the top node with the highest `(stakes*votes)` values.
-    * Snippet of the delegated selection implemented in Blockchain class in `blockchain.py`
-    ```
-
-    ```
-
-* The primary node (localhost:7000) generates the delegate list and all other nodes can view the elected delegates. For this we have a sync method.
-    * Snippet of sync method implemented in Blockchain class in `blockchain.py`
-    ```
-
-    ```
-
-### API endpoints to interact with our blockchain
-
-1). `/nodes/add`
-
-The first step in initialising the network is to add the nodes along with their stakes. This is done by a POST route. The URL of the nodes along with their stakes need to be added one at a time. This endpoint needs to be run from all ports before beginning any transaction in the blockchain.
+The first step is to add the nodes along with their stakes. This is done by a POST route. The URL address of the nodes along with their stakes need to be added.
 
 ![Nodes add](./Images/add_nodes.jpg)
 
-2). `/voting`
+2). `/vote`
 
 Voting is done using a GET route. Voting can only be conducted by the primary node (`localhost:7000`), and all other nodes receive an error message. Once called, a JSON response which consists the address of the node, stake of the node and the value of (stake * votes) corresponding to the nodes is sent to the primary node.
 
@@ -61,27 +35,27 @@ Voting results showing address, stake and (votes * stake) of all participating n
 Nodes apart from the primary node receive an error message.
 ![Error](./Images/voting_error.jpg)
 
-3). `/delegates/show`
+3). `/show`
 
-This GET route sends all the delegates elected for mining to be viewed to the primary node.
+This GET route sends all the delegates elected to the primary node.
 
 ![Show delegates](./Images/delegates_show.jpg)
 
-4). `/delegates/sync`
+4). `/sync`
 
-This GET endpoint allows all the other nodes in the network to also fetch the list of delegate nodes.
+This GET route allows all the other nodes in the network to fetch the list of delegate nodes.
 
 ![Sync delegates](./Images/delegates_sync.jpg)
 
-5). `/transactions/new`
+5). `/transaction/new`
 
-This POST method initiates a new transaction and requires the user to enter the customer name, item name and total billing amount in JSON format.
+This POST route initiates a new transaction and requires the user to enter the buyer name, seller name, property name and amount in JSON format.
 
 ![New transaction](./Images/transaction.jpg)
 
 6). `/mine`
 
-This GET endpoint facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate or validator nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
+This GET endpoint facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
 
 This error message will be received by a non-delegate node that tries to mine a new block.
 ![Mine error](./Images/error_mine.jpg)
@@ -92,12 +66,12 @@ There must be atleast 2 transactions per block
 Structure of a typical block mined by a delegated node
 ![Block structure](./Images/block.jpg)
 
-7). `/chain`
+7). `/blockchain`
 
-This GET method facilitates the user to view the entire blockchain and its length.
+This GET route facilitates the user to view the entire blockchain and its length.
 
 ![Blockchain](./Images/chain.jpg)
 
-8). `/chain/resolve`
+8). `/blockchain/resolve`
 
-This endpoint finds the longest validated chain by checking all the neighbouring nodes in the network and sets it as the primary blockchain.
+This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
