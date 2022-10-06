@@ -33,12 +33,12 @@ class Blockchain(object):
         self.voteNodespool = []
  
         #Sorted List storing nodes in the order of most votes received
-        self.starNodespool = []
+        self.sortedNodespool = []
  
-        #List storing the top 3 nodes with the highest value of stake*votes_received
-        self.superNodespool = []
+        #List storing the top 2 nodes with the highest value of stake*votes_received
+        self.topNodespool = []
  
-        #List storing the address of the delegate nodes selected for mining
+        #List storing the address of the delegate node selected for mining
         self.delegates = []
  
  
@@ -103,28 +103,28 @@ class Blockchain(object):
         print(self.voteNodespool)
  
  
-    #Selecting the top node with the most votes
+    #Selecting the top 2 nodes with the most votes
     def selection(self):
-        self.starNodespool = sorted(self.voteNodespool, key = lambda vote: vote[2],reverse = True)
-        print(self.starNodespool)
+        self.sortedNodespool = sorted(self.voteNodespool, key = lambda vote: vote[2],reverse = True)
+        print(self.sortedNodespool)
  
-        for x in range(1):
-            self.superNodespool.append(self.starNodespool[x])
-        print(self.superNodespool)
+        for x in range(2):
+            self.topNodespool.append(self.sortedNodespool[x])
+        print(self.topNodespool)
  
-        for y in self.superNodespool:
+        for y in self.topNodespool:
             self.delegates.append(y[0])
         print(self.delegates)
  
  
     #Syncing the list
     def sync(self):
-        r = requests.get('http://localhost:7000/delegates/show')
+        r = requests.get('http://localhost:7000/show')
         print(r)
  
         if(r.status_code == 200):
             delegates = r.json()['node_delegates']
-            self.delegates = delegates[0:1]
+            self.delegates = delegates[0:2]
             print(self.delegates)
  
  
@@ -168,4 +168,3 @@ class Blockchain(object):
             return True
  
         return False 
- 
