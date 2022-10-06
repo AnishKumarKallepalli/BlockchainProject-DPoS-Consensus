@@ -55,7 +55,7 @@ This POST route initiates a new transaction and requires the user to enter the b
 
 6). `/mine`
 
-This GET endpoint facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
+This GET route facilitates validating transactions and mining new blocks. Adhering to the DPoS consensus, only delegate nodes can mine the new blocks.To ensure no block goes underfilled, a new block can be mined only when there are atleast two unverified transactions.
 
 This error message will be received by a non-delegate node that tries to mine a new block.
 ![Mine error](./Images/error_mine.jpg)
