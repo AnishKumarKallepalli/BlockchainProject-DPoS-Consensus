@@ -50,7 +50,7 @@ def voting():
  
 
 
-#API call to view the list of the elected delegate nodes
+#API call to view the list of the top elected delegate nodes
 @app.route('/show',methods=['GET'])
 def delegates():
     show_delegates = blockchain.selection()
