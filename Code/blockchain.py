@@ -4,7 +4,60 @@ from datetime import datetime
 from urllib.parse import urlparse
 import requests
 from random import randint
- 
+from typing import List
+import typing
+
+# Node class
+class Node:
+    def __init__(self, left, right, value: str)-> None:
+        self.left: Node = left
+        self.right: Node = right
+        self.value = value
+
+    @staticmethod
+    def hash(val: str)-> str:
+        return hashlib.sha256(val.encode('utf-8')).hexdigest()
+
+    @staticmethod
+    def doubleHash(val: str)-> str:
+        return Node.hash(Node.hash(val))
+
+
+# Merkletree class
+class MerkleTree:
+    def __init__(self, values: List[str])-> None:
+        self.__buildTree(values)
+
+    def __buildTree(self, values: List[str])-> None:
+        leaves: List[Node] = [Node(None, None, Node.doubleHash(e)) for e in values]
+        if len(leaves) % 2 == 1:
+            leaves.append(leaves[-1:][0]) # duplicate last elem if odd number of elements
+        self.root: Node = self.__buildTreeRec(leaves)
+
+    def __buildTreeRec(self, nodes: List[Node])-> Node:
+        half: int = len(nodes) // 2
+
+        if len(nodes) == 2:
+            return Node(nodes[0], nodes[1], Node.doubleHash(nodes[0].value + nodes[1].value))
+
+        left: Node = self.__buildTreeRec(nodes[:half])
+        right: Node = self.__buildTreeRec(nodes[half:])
+        value: str = Node.doubleHash(left.value + right.value)
+        return Node(left, right, value)
+
+    def printTree(self)-> None:
+        self.__printTreeRec(self.root)
+
+    def __printTreeRec(self, node)-> None:
+        if node != None:
+            print(node.value)
+            self.__printTreeRec(node.left)
+            self.__printTreeRec(node.right)
+
+    def getRootHash(self)-> str:
+        return self.root.value
+
+
 # Blockchain class
 class Blockchain(object):
  
@@ -19,6 +72,9 @@ class Blockchain(object):
  
         #List storing the verified transactions
         self.verified_transactions = []
+
+        #List storing the transactions as strings
+        self.transactions_strings = []
  
         #Defining the Genesis block        
         self.new_block(previous_hash = 1)
@@ -44,8 +100,14 @@ class Blockchain(object):
  
     # Creating a new block in the Blockchain
     def new_block(self,previous_hash = None):
+        merkleroot = '1'
+        if(len(self.transactions_strings)!=0):
+            mtree = MerkleTree(self.transactions_strings)
+            merkleroot = mtree.getRootHash()
+        print(self.transactions_strings)
         block = {
             'index': len(self.chain) + 1,
+            'merkle_root': merkleroot,
             'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'transactions': self.unverified_transactions,
             'previous_hash': previous_hash or self.hash(self.chain[-1])
@@ -53,6 +115,8 @@ class Blockchain(object):
         self.verified_transactions += self.unverified_transactions
         print(self.verified_transactions)
         self.unverified_transactions = []
+        
+        self.transactions_strings = []
  
         #appending the block at the end of the blockchain
         self.chain.append(block)
@@ -61,6 +125,12 @@ class Blockchain(object):
  
     #Adding a new transaction in the next block
     def new_transaction(self, buyer_name, seller_name, property_name, amount):
+        self.transactions_strings.append(
+            ' Buyer name '+ str(buyer_name) +
+            ' Seller name '+ str(seller_name) +
+            ' Property name '+ str(property_name) +
+            ' Amount '+ str(amount)
+        )
         self.unverified_transactions.append({
             'Buyer name': buyer_name,
             'Seller name': seller_name,
