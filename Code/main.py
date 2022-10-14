@@ -112,6 +112,7 @@ def mine():
                 'message': "New block mined!",
                 'index': block['index'],
                 'transactions': block['transactions'],
+                'merkle_root': block['merkle_root'],
                 'previous_hash': block['previous_hash']
             }
             print(len(blockchain.unverified_transactions))
