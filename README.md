@@ -86,4 +86,4 @@ This GET route facilitates the user to view the entire blockchain and its length
 
 This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
 
-9)![Resolve](./Images/blockchain/resolve.jpg)
+9)![Resolve](./Images/blockchain_resolve.jpg)
