@@ -28,7 +28,7 @@ Delegated Proof Of Stake (DPoS) is a consensus algorithm which is an advancement
 
 This is  a POST route to add nodes. The URL address of the nodes along with their stakes need to be added.
 
-![Nodes add](./Images/add_nodes.jpg)
+![Nodes add](./Images/addNode.jpg)
 
 2). `/vote`
 
@@ -36,29 +36,29 @@ Voting is done using a GET route. Voting can only be conducted by the primary no
 
 Voting results showing address, stake and (votes * stake) of all nodes.
 
-![Voting](./Images/voting.jpg)
+![Voting](./Images/vote.jpg)
 
 Nodes apart from the primary node receive an error message.
 
-![Error](./Images/voting_error.jpg)
+![Error](./Images/vote_error.jpg)
 
 3). `/show`
 
 This GET route sends all the elected delegates to the primary node.
 
-![Show delegates](./Images/delegates_show.jpg)
+![Show delegates](./Images/show.jpg)
 
 4). `/sync`
 
 This GET route allows all the other nodes in the network to fetch the list of delegate nodes.
 
-![Sync delegates](./Images/delegates_sync.jpg)
+![Sync delegates](./Images/sync.jpg)
 
 5). `/transaction/new`
 
 This POST route initiates a new transaction and requires the user to enter the buyer name, seller name, property name and amount in JSON format.
 
-![New transaction](./Images/transaction.jpg)
+![New transaction](./Images/transaction_2.jpg)
 
 6). `/mine`
 
@@ -66,24 +66,24 @@ This GET route facilitates validating transactions and mining new blocks. Accord
 
 There must be atleast 2 transactions per block
 
-![Under transaction](./Images/transaction2.jpg)
+![Under transaction](./Images/transaction_new.jpg)
 
 This error message will be received by a non-delegate node that tries to mine a new block.
 
-![Mine error](./Images/error_mine.jpg)
+![Mine error](./Images/mine_error.jpg)
 
 Structure of a typical block mined by a delegated node
 
-![Block structure](./Images/block.jpg)
+![Block structure](./Images/mine_accepted.jpg)
 
 7). `/blockchain`
 
 This GET route facilitates the user to view the entire blockchain and its length.
 
-![Blockchain](./Images/chain.jpg)
+![Blockchain](./Images/blockchain.jpg)
 
 8). `/blockchain/resolve`
 
 This route finds the longest validated chain by checking all the nodes in the network and sets the node with the longest length as the primary blockchain.
 
-9)![Resolve](./Images/resolve.jpg)
+9)![Resolve](./Images/blockchain/resolve.jpg)
